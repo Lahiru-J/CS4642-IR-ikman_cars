@@ -13,7 +13,7 @@ class CarsSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        if 'https://ikman.lk/en/ads/sri-lanka/cars?categoryType=ads&categoryName=Cars&page=' in response.url:
+        if 'https://ikman.lk/en/ads/sri-lanka/cars-vehicles?categoryType=ads&categoryName=Cars+%26+Vehicles&page=' in response.url:
             # listing page
             ''
             links = response.xpath(
