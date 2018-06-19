@@ -15,7 +15,8 @@ class CarsSpider(scrapy.Spider):
     def parse(self, response):
         if 'https://ikman.lk/en/ads/sri-lanka/cars?categoryType=ads&categoryName=Cars&page=' in response.url:
             # listing page
-            links = response.xpath('//ul[@class="media-list search-results"]/div[@class="row"]/a/@href').extract()
+            ''
+            links = response.xpath('//div[@class="serp-items"]/div[contains(@class, "ui-item")]/div[@class="item-content"]/a/@href').extract()
             for link in links:
                 yield scrapy.Request('https://ikman.lk/'+link, callback=self.parse)
         else:
