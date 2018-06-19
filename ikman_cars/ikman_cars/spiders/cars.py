@@ -21,19 +21,20 @@ class CarsSpider(scrapy.Spider):
         else:
             # restaurant page
             title = response.xpath('//div[@class="item-top col-12 lg-8"]/h1/text()').extract_first()
-            brand = response.xpath('//ul[@class="place-title-list list-inline"]/li/a/text()').extract_first()
-            model_year = response.xpath('//div[@class="place-title-box"]/p/text()').extract_first()
-            transmission = response.xpath('//div[@class="place-title-box"]/p[@class="excerpt"]/text()').extract_first()
-            model = response.xpath(
-                '//div[@class="author-byline"]/div[@class="media"]/div/div/a/span/text()').extract_first()
-            body_type = response.xpath('//p[text()="Cuisine"]/following::p[1]/a/text()').extract()
-            fuel_type = response.xpath('//p[text()="Price Range"]/following::p[1]/a/text()').extract()
-            engine_capacity = response.xpath('//p[text()="Dish Types"]/following::p[1]/a/text()').extract()
-            mileage = response.xpath('//dt/a[text()="Overall Rating"]/following::dd[1]/span/text()').extract_first()
+            brand = response.xpath('//div[@class="item-properties"]/dl[1]/dd/text()').extract_first()
+            model_year = response.xpath('//div[@class="item-properties"]/dl[2]/dd/text()').extract_first()
+            condition = response.xpath('//div[@class="item-properties"]/dl[3]/dd/text()').extract_first()
+            transmission = response.xpath('//div[@class="item-properties"]/dl[4]/dd/text()').extract_first()
+            model = response.xpath('//div[@class="item-properties"]/dl[5]/dd/text()').extract_first()
+            body_type = response.xpath('//div[@class="item-properties"]/dl[6]/dd/text()').extract()
+            fuel_type = response.xpath('//div[@class="item-properties"]/dl[7]/dd/text()').extract()
+            engine_capacity = response.xpath('//div[@class="item-properties"]/dl[8]/dd/text()').extract()
+            mileage = response.xpath('//div[@class="item-properties"]/dl[9]/dd/text()').extract_first()
             yield {
                 'title': title,
                 'brand': brand,
                 'model_year': model_year,
+                'condition' : condition,
                 'transmission': transmission,
                 'model': model,
                 'body_type': body_type,
