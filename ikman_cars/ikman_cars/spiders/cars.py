@@ -16,11 +16,12 @@ class CarsSpider(scrapy.Spider):
         if 'https://ikman.lk/en/ads/sri-lanka/cars?categoryType=ads&categoryName=Cars&page=' in response.url:
             # listing page
             ''
-            links = response.xpath('//div[@class="serp-items"]/div[contains(@class, "ui-item")]/div[@class="item-content"]/a/@href').extract()
+            links = response.xpath(
+                '//div[@class="serp-items"]/div[contains(@class, "ui-item")]/div[@class="item-content"]/a/@href').extract()
             for link in links:
-                yield scrapy.Request('https://ikman.lk/'+link, callback=self.parse)
+                yield scrapy.Request('https://ikman.lk/' + link, callback=self.parse)
         else:
-            # restaurant page
+            # car advertisements
             title = response.xpath('//div[@class="item-top col-12 lg-8"]/h1/text()').extract_first()
             brand = response.xpath('//div[@class="item-properties"]/dl[1]/dd/text()').extract_first()
             model_year = response.xpath('//div[@class="item-properties"]/dl[2]/dd/text()').extract_first()
@@ -35,7 +36,7 @@ class CarsSpider(scrapy.Spider):
                 'title': title,
                 'brand': brand,
                 'model_year': model_year,
-                'condition' : condition,
+                'condition': condition,
                 'transmission': transmission,
                 'model': model,
                 'body_type': body_type,
